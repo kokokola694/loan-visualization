@@ -1,0 +1,5 @@
+class Loan < ApplicationRecord
+
+
+
+end

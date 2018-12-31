@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Graph from './root';
+import Graph from './graph';
 
 
 document.addEventListener('DOMContentLoaded', () => {

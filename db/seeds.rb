@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Loan.destroy_all
+
+require 'csv'
+filename = File.join Rails.root, "db/LoanStats3a.csv"
+CSV.foreach(filename, :headers => true) do |row|
+  Loan.create!(row.to_hash)
+end
