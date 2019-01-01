@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 Loan.destroy_all
 
 require 'csv'
@@ -16,5 +8,7 @@ CSV.foreach(filename, :headers => true) do |row|
   # Fix int rate
   row["int_rate"] = row["int_rate"][1...-1].to_f
 
-  Loan.create!(row.to_hash)
+  # Just look at 2011
+  year = row["issue_d"].split("-").last
+  Loan.create!(row.to_hash) if year == "2011"
 end

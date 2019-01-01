@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background: teal;
+}
+
+main {
+
+}
+
+.chart-container h1 {
+  margin: 50px;
+  text-align: center;
+  display: block;
+  font-style: sans-serif;
+  color: white;
+  font-size: 38px;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.rv-xy-plot {
+  margin: 0 auto;
+}
+
+.rv-xy-plot text {
+  fill: white;
+}
+
+.rv-xy-plot__axis__title > g > text {
+    fill: white;
+    font-size: 14px;
+}

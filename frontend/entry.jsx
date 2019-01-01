@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Graph from './graph';
+import App from './app';
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.getElementById("root");
-  ReactDOM.render(<Graph />, root);
+  ReactDOM.render(<App />, root);
 })
