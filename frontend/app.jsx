@@ -1,12 +1,16 @@
 import React from 'react';
 import Chart from './chart';
+import { ScaleLoader } from 'react-spinners';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loans: [],
-      year: "ALL"
+      2009: false,
+      2010: false,
+      2011: false,
+      loading: true
     }
   }
 
@@ -16,52 +20,75 @@ class App extends React.Component {
       url: "api/loans"
     }).then(loans => {
       let loansByMonth = {
-        // Sum, count, month #
-        // Keep track of month to keep sorted
-        1: {2009: [0,0,1], 2010: [0,0,1], 2011: [0,0,1]},
-        2: {2009: [0,0,2], 2010: [0,0,2], 2011: [0,0,2]},
-        3: {2009: [0,0,3], 2010: [0,0,3], 2011: [0,0,3]},
-        4: {2009: [0,0,4], 2010: [0,0,4], 2011: [0,0,4]},
-        5: {2009: [0,0,5], 2010: [0,0,5], 2011: [0,0,5]},
-        6: {2009: [0,0,6], 2010: [0,0,6], 2011: [0,0,6]},
-        7: {2009: [0,0,7], 2010: [0,0,7], 2011: [0,0,7]},
-        8: {2009: [0,0,8], 2010: [0,0,8], 2011: [0,0,8]},
-        9: {2009: [0,0,9], 2010: [0,0,9], 2011: [0,0,9]},
-        10: {2009: [0,0,10], 2010: [0,0,10], 2011: [0,0,10]},
-        11: {2009: [0,0,11], 2010: [0,0,11], 2011: [0,0,11]},
-        12: {2009: [0,0,12], 2010: [0,0,12], 2011: [0,0,12]},
+        // Keep track of [Avg, count] for each year
+        1: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 1},
+        2: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 2},
+        3: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 3},
+        4: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 4},
+        5: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 5},
+        6: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 6},
+        7: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 7},
+        8: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 8},
+        9: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 9},
+        10: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 10},
+        11: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 11},
+        12: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 12},
       }
 
       Object.values(loans).forEach( loan => {
-        let newSum = loansByMonth[loan.month][loan.year][0] + loan.int_rate;
-        let newCount = loansByMonth[loan.month][loan.year][1] + 1;
-        const month = loansByMonth[loan.month][loan.year][2];
-        loansByMonth[loan.month][loan.year] = [newSum, newCount, month];
+        const oldSum = loansByMonth[loan.month][loan.year][0] *
+          loansByMonth[loan.month][loan.year][1]
+        const newSum = oldSum + loan.int_rate;
+        const newCount = loansByMonth[loan.month][loan.year][1] + 1;
+        const newAvg = newSum / newCount;
+        loansByMonth[loan.month][loan.year] = [newAvg, newCount];
       });
 
-      this.setState({loans: Object.values(loansByMonth) })
+      this.setState({ loans: Object.values(loansByMonth), loading: false });
     })
   }
 
   changeYear (year) {
     return (e) => {
-      this.setState({ year });
+      const colors = { 2009: 'brown', 2010: 'yellow', 2011: 'salmon' }
+      const btn = document.getElementById(`${year}`);
+      btn.classList.toggle(`${colors[year]}`)
+      btn.style.color = !this.state[year] ? 'black' : 'white';
+      this.setState({
+        [year]: !this.state[year]
+      });
     }
   }
 
   render () {
-    const { loans, year } = this.state;
+    if (this.state.loading) {
+      return (
+        <div className='sweet-loading'>
+        <ScaleLoader
+          sizeUnit={"px"}
+          height={150}
+          width={7}
+          size={150}
+          color={'violet'}
+          loading={this.state.loading}
+          />
+        </div>
+      )
+    }
+
+    const { loans } = this.state;
+    const years = [this.state[2009], this.state[2010], this.state[2011]];
     return (
       <div className="chart-container">
         <h1>Loan Interest Rate by Month</h1>
-        <h2>Year: {year}</h2>
-        <Chart data={loans} year={year}/>
+        <h2>Data by Lending Club Statistics</h2>
+        <Chart data={loans} years={years}/>
 
-        <div className="year-buttons">
-          <button onClick={this.changeYear(2009)}>2009</button>
-          <button onClick={this.changeYear(2010)}>2010</button>
-          <button onClick={this.changeYear(2011)}>2011</button>
-          <button onClick={this.changeYear("ALL")}>ALL</button>
+        <div id="btns" className="year-buttons">
+          <button id="2009" onClick={this.changeYear(2009)}>2009</button>
+          <button id="2010" onClick={this.changeYear(2010)}>2010</button>
+          <button id="2011" onClick={this.changeYear(2011)}>2011</button>
+          <button id="all-btn">All</button>
         </div>
       </div>
     )

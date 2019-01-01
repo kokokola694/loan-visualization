@@ -3,22 +3,42 @@ import { XYPlot, XAxis, YAxis, VerticalGridLines,
 import React from 'react';
 
 const Chart = (props) => {
-  // debugger
-  const dataArr = props.data.map(loan => {
-    let avg;
-    if (props.year === "ALL") {
-      const sum = loan[2009][0] + loan[2010][0] + loan[2011][0];
-      const count = loan[2009][1] + loan[2010][1] + loan[2011][1];
-      avg = sum / count;
-    } else {
-      avg = loan[props.year][0] / loan[props.year][1];
-    }
+  const dataArr2009 = [];
+  const dataArr2010 = [];
+  const dataArr2011 = [];
+  const dataArr = [];
 
-    return {
-      x: parseFloat(loan[2011][2]),
-      y: parseFloat(avg)
-    }
+  props.data.forEach(loan => {
+    dataArr2009.push({x: parseFloat(loan.month), y: parseFloat(loan[2009][0])});
+    dataArr2010.push({x: parseFloat(loan.month), y: parseFloat(loan[2010][0])});
+    dataArr2011.push({x: parseFloat(loan.month), y: parseFloat(loan[2011][0])});
+
+    const overallSum = loan[2009][0] * loan[2009][1] +
+      loan[2010][0] * loan[2010][1] + loan[2011][0] * loan[2011][1];
+    const overallCount = loan[2009][1] + loan[2010][1] + loan[2011][1];
+    const avg = overallSum / overallCount;
+    dataArr.push({x: parseFloat(loan.month), y: parseFloat(avg)});
   });
+
+  const line2009 = props.years[0] ? (
+    <LineSeries
+      data={dataArr2009}
+      style={{stroke: 'brown', strokeWidth: 3}}/>
+  ) : null;
+
+  const line2010 = props.years[1] ? (
+    <LineSeries
+      data={dataArr2010}
+      style={{stroke: 'yellow', strokeWidth: 3}}/>
+  ) : null;
+
+  const line2011 = props.years[2] ? (
+    <LineSeries
+      data={dataArr2011}
+      style={{stroke: 'salmon', strokeWidth: 3}}/>
+  ) : null;
+
+
   return (
       <XYPlot
         xType="ordinal"
@@ -27,10 +47,13 @@ const Chart = (props) => {
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis title="Month"/>
-        <YAxis title="Interest Rate"/>
+        <YAxis title="Interest Rate (%)"/>
         <LineSeries
           data={dataArr}
           style={{stroke: 'violet', strokeWidth: 3}}/>
+        {line2009}
+        {line2010}
+        {line2011}
       </XYPlot>
   );
 }

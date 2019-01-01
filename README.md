@@ -1,24 +1,3 @@
-# README
+# Data Visualization using React
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This app creates a simple visualization of the relationship between loan interest rates and month, across years between 2009 and 2011. As my first data visualization project, I decided to use a well-known library from Uber called `react-vis`.
