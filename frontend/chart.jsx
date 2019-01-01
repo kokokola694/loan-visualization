@@ -3,15 +3,19 @@ import { XYPlot, XAxis, YAxis, VerticalGridLines,
 import React from 'react';
 
 const Chart = (props) => {
+  // debugger
   const dataArr = props.data.map(loan => {
     let avg;
-    if (loan[1] !== 0) {
-      avg = loan[0] / loan[1];
+    if (props.year === "ALL") {
+      const sum = loan[2009][0] + loan[2010][0] + loan[2011][0];
+      const count = loan[2009][1] + loan[2010][1] + loan[2011][1];
+      avg = sum / count;
     } else {
-      avg = 0;
+      avg = loan[props.year][0] / loan[props.year][1];
     }
+
     return {
-      x: parseFloat(loan[2]),
+      x: parseFloat(loan[2011][2]),
       y: parseFloat(avg)
     }
   });
@@ -22,7 +26,7 @@ const Chart = (props) => {
         height={500}>
         <VerticalGridLines />
         <HorizontalGridLines />
-        <XAxis title="Month of 2011"/>
+        <XAxis title="Month"/>
         <YAxis title="Interest Rate"/>
         <LineSeries
           data={dataArr}

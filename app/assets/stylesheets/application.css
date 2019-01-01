@@ -23,16 +23,20 @@ main {
 }
 
 .chart-container h1 {
-  margin: 50px;
-  text-align: center;
-  display: block;
-  font-style: sans-serif;
-  color: white;
+  margin-top: 40px;
   font-size: 38px;
+}
+
+.chart-container h2 {
+  margin: 10px 0 40px 0;
+  font-size: 25px;
 }
 
 .chart-container {
   width: 100%;
+  text-align: center;
+  font-style: sans-serif;
+  color: white;
 }
 
 .rv-xy-plot {
@@ -46,4 +50,26 @@ main {
 .rv-xy-plot__axis__title > g > text {
     fill: white;
     font-size: 14px;
+}
+
+.year-buttons {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+  justify-content: space-around;
+}
+
+.year-buttons button {
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: darkgreen;
+  transition-duration: 0.2s;
+}
+
+.year-buttons button:hover {
+  background: lightgreen;
+  color: darkgreen;
 }

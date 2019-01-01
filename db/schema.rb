@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_223852) do
+ActiveRecord::Schema.define(version: 2019_01_01_031127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_223852) do
     t.string "loan_status"
     t.string "grade"
     t.float "int_rate"
+    t.integer "year"
+    t.integer "month"
   end
 
 end
