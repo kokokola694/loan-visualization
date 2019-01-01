@@ -18,33 +18,22 @@ class App extends React.Component {
     $.ajax({
       method: "GET",
       url: "api/loans"
-    }).then(loans => {
-      let loansByMonth = {
-        // Keep track of [Avg, count] for each year
-        1: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 1},
-        2: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 2},
-        3: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 3},
-        4: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 4},
-        5: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 5},
-        6: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 6},
-        7: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 7},
-        8: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 8},
-        9: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 9},
-        10: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 10},
-        11: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 11},
-        12: {2009: [0,0], 2010: [0,0], 2011: [0,0], "month": 12},
+    }).then(({ counts, averages }) => {
+
+      const data = {2009: [], 2010: [], 2011: [], "all": []};
+
+      for (let m = 1; m <= 12; m++) {
+        let sum = 0;
+        let count = 0;
+        for (let y = 2009; y <= 2011; y++) {
+          const avg = averages[`[${y}, ${m}]`];
+          data[y].push({x: parseFloat(m), y: parseFloat(avg)});
+          sum += avg * counts[`[${y}, ${m}]`];
+          count += counts[`[${y}, ${m}]`];
+        }
+        data["all"].push({x: parseFloat(m), y: parseFloat(sum/count)})
       }
-
-      Object.values(loans).forEach( loan => {
-        const oldSum = loansByMonth[loan.month][loan.year][0] *
-          loansByMonth[loan.month][loan.year][1]
-        const newSum = oldSum + loan.int_rate;
-        const newCount = loansByMonth[loan.month][loan.year][1] + 1;
-        const newAvg = newSum / newCount;
-        loansByMonth[loan.month][loan.year] = [newAvg, newCount];
-      });
-
-      this.setState({ loans: Object.values(loansByMonth), loading: false });
+      this.setState({ loans: Object.values(data), loading: false });
     })
   }
 

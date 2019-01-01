@@ -21,7 +21,7 @@ This project incorporates a Ruby on Rails backend with PostgreSQL for storing th
 
 2. Organizing the Backend
 
-  * Ideally this is where I would do the mean calculations by year to lessen wait time when loading the page.
+  * By grouping up the data in the backend, there is much less stress and waittime on the frontend. Averages were calculated by month and year (see `loans_controller.rb` and `loans/index.json.jbuilder`).
   * Loan data from before 2009 is filtered out (`app/controllers/api/loans_controller.rb`).
 
 3. Implementing Visualization
@@ -45,6 +45,5 @@ This project incorporates a Ruby on Rails backend with PostgreSQL for storing th
 
 ### Improvements
 If more time was allowed, I would incorporate the following:
-* Group the data by year in the backend, to lessen wait time on frontend. I spent about half an hour going about this, but decided to make sure I have a functioning app first.
 * Add more buttons to group the data points (ex. grade, term, etc.).
 * Add more interactivity to the graph. `react-vis` has interactive features that I was not able to explore here - for example, when hovering over a line at a certain year, I could display the average interest rate.
