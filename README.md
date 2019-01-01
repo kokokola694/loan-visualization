@@ -7,6 +7,10 @@ This app creates a simple visualization of the relationship between loan interes
 ### Technologies
 This project incorporates a Ruby on Rails backend with PostgreSQL for storing the `.csv` data. React, HTML, and CSS are used for the frontend.
 
+### How to Use
+* Download the repo and run `rails s` and `npm start`. Open `localhost:3000` on your browser.
+* Click on the buttons to change graph display.
+
 ### Basic Steps
 1. Importing the Data
 
