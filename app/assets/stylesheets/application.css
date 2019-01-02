@@ -26,7 +26,7 @@ main {
   background: teal;
   padding: 25px 0 25px 0;
   margin: 30px auto;
-  width: 50%;
+  width: 40%;
   font-size: 38px;
   border: 2px solid white;
 }
@@ -69,13 +69,12 @@ h2 {
   border: 1px solid white;
   padding: 10px 20px;
   border-radius: 20px;
-  background-color: darkgreen;
+  background-color: #1f6580;
   transition-duration: 0.2s;
 }
 
 .year-buttons button:hover {
   background-color: lightgreen;
-  color: darkgreen;
 }
 
 #all-btn {
@@ -93,14 +92,18 @@ h2 {
   width: 100px;
 }
 
-.year-buttons .salmon {
+.year-buttons .color2008 {
+  background-color: #b12b2b;
+}
+
+.year-buttons .color2011 {
   background-color: salmon;
 }
 
-.year-buttons .brown {
-  background-color: brown;
+.year-buttons .color2009 {
+  background-color: #37dc3c;
 }
 
-.year-buttons .yellow {
+.year-buttons .color2010 {
   background-color: yellow;
 }

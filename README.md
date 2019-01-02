@@ -1,8 +1,8 @@
 # Data Visualization using React
 
-This app creates a simple visualization of the relationship between loan interest rates and month, across years between 2009 and 2011. As my first data visualization project, I decided to use a well-known library from Uber called `react-vis`.
+This app creates a simple visualization of the relationship between loan interest rates and month, across years between 2009 and 2011. As my first data visualization project, I decided to use a well-known library from Uber called `react-vis`. Visualizations are powerful and can help determine patterns in the data before running any statistical tests - for example, we see that loan interest rates seem to hover around the same range between May and September in recent years, but have higher variance in winter months.
 
-![img](app/assets/images/loan-vis.png)
+![img](app/assets/images/loan-vis2.png)
 
 ### Technologies
 This project incorporates a Ruby on Rails backend with PostgreSQL for storing the `.csv` data. React, HTML, and CSS are used for the frontend.
@@ -44,5 +44,5 @@ This project incorporates a Ruby on Rails backend with PostgreSQL for storing th
 
 ### Improvements
 If more time was allowed, I would incorporate the following:
-* Add more buttons to group the data points (ex. grade, term, etc.).
+* Add more categorical buttons to group the data points (ex. grade, term, etc.).
 * Add more interactivity to the graph. `react-vis` has interactive features that I was not able to explore here - for example, when hovering over a line at a certain year, I could display the average interest rate using `OnNearestX`.

@@ -2,23 +2,29 @@ import { XYPlot, XAxis, YAxis, VerticalGridLines,
   HorizontalGridLines, LineSeries } from 'react-vis';
 import React from 'react';
 
-const Chart = (props) => {
+const Chart = ({years, data}) => {
 
-  const line2009 = props.years[0] ? (
+  const line2008 = years[0] ? (
     <LineSeries
-      data={props.data[0]}
-      style={{stroke: 'brown', strokeWidth: 3}}/>
+      data={data[0]}
+      style={{stroke: '#b12b2b', strokeWidth: 3}}/>
   ) : null;
 
-  const line2010 = props.years[1] ? (
+  const line2009 = years[1] ? (
     <LineSeries
-      data={props.data[1]}
+      data={data[1]}
+      style={{stroke: '#37dc3c', strokeWidth: 3}}/>
+  ) : null;
+
+  const line2010 = years[2] ? (
+    <LineSeries
+      data={data[2]}
       style={{stroke: 'yellow', strokeWidth: 3}}/>
   ) : null;
 
-  const line2011 = props.years[2] ? (
+  const line2011 = years[3] ? (
     <LineSeries
-      data={props.data[2]}
+      data={data[3]}
       style={{stroke: 'salmon', strokeWidth: 3}}/>
   ) : null;
 
@@ -27,14 +33,16 @@ const Chart = (props) => {
       <XYPlot
         xType="ordinal"
         width={1000}
-        height={500}>
+        height={500}
+        yDomain={[10.5, 13.5]}>
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis title="Month"/>
         <YAxis title="Interest Rate (%)"/>
         <LineSeries
-          data={props.data[3]}
+          data={data[4]}
           style={{stroke: 'violet', strokeWidth: 3}}/>
+        {line2008}
         {line2009}
         {line2010}
         {line2011}

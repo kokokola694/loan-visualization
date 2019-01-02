@@ -7,6 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       loans: [],
+      2008: false,
       2009: false,
       2010: false,
       2011: false,
@@ -20,12 +21,12 @@ class App extends React.Component {
       url: "api/loans"
     }).then(({ counts, averages }) => {
 
-      const data = {2009: [], 2010: [], 2011: [], "all": []};
+      const data = {2008: [], 2009: [], 2010: [], 2011: [], "all": []};
 
       for (let m = 1; m <= 12; m++) {
         let sum = 0;
         let count = 0;
-        for (let y = 2009; y <= 2011; y++) {
+        for (let y = 2008; y <= 2011; y++) {
           const avg = averages[`[${y}, ${m}]`];
           data[y].push({x: parseFloat(m), y: parseFloat(avg)});
           sum += avg * counts[`[${y}, ${m}]`];
@@ -39,7 +40,8 @@ class App extends React.Component {
 
   changeYear (year) {
     return (e) => {
-      const colors = { 2009: 'brown', 2010: 'yellow', 2011: 'salmon' }
+      const colors = { 2008: 'color2008', 2009: 'color2009',
+        2010: 'color2010', 2011: 'color2011' }
       const btn = document.getElementById(`${year}`);
       btn.classList.toggle(`${colors[year]}`)
       btn.style.color = !this.state[year] ? 'black' : 'white';
@@ -66,7 +68,7 @@ class App extends React.Component {
     }
 
     const { loans } = this.state;
-    const years = [this.state[2009], this.state[2010], this.state[2011]];
+    const years = [this.state[2008], this.state[2009], this.state[2010], this.state[2011]];
     return (
       <div className="chart-container">
         <header>
@@ -76,6 +78,7 @@ class App extends React.Component {
         <Chart data={loans} years={years}/>
 
         <div id="btns" className="year-buttons">
+          <button id="2008" onClick={this.changeYear(2008)}>2008</button>
           <button id="2009" onClick={this.changeYear(2009)}>2009</button>
           <button id="2010" onClick={this.changeYear(2010)}>2010</button>
           <button id="2011" onClick={this.changeYear(2011)}>2011</button>
