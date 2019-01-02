@@ -22,13 +22,17 @@ main {
 
 }
 
-.chart-container h1 {
-  margin: 40px 0 5px 0;
+.chart-container header {
+  background: teal;
+  padding: 25px 0 25px 0;
+  margin: 30px auto;
+  width: 50%;
   font-size: 38px;
+  border: 2px solid white;
 }
 
 h2 {
-  margin-bottom: 40px;
+  margin: 5px;
   font-size: 14px;
 }
 

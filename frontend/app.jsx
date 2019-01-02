@@ -69,8 +69,10 @@ class App extends React.Component {
     const years = [this.state[2009], this.state[2010], this.state[2011]];
     return (
       <div className="chart-container">
-        <h1>Loan Interest Rate by Month</h1>
-        <h2>Data by Lending Club Statistics</h2>
+        <header>
+          <h1>Loan Interest Rate by Month</h1>
+          <h2>data by Lending Club Statistics</h2>
+        </header>
         <Chart data={loans} years={years}/>
 
         <div id="btns" className="year-buttons">

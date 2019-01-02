@@ -37,8 +37,7 @@ This project incorporates a Ruby on Rails backend with PostgreSQL for storing th
     <XAxis title="Month"/>
     <YAxis title="Interest Rate (%)"/>
     <LineSeries
-      data={dataArr}
-      style={{stroke: 'violet', strokeWidth: 3}}/>
+      .../>
     ...
   </XYPlot>
   ```
@@ -46,4 +45,4 @@ This project incorporates a Ruby on Rails backend with PostgreSQL for storing th
 ### Improvements
 If more time was allowed, I would incorporate the following:
 * Add more buttons to group the data points (ex. grade, term, etc.).
-* Add more interactivity to the graph. `react-vis` has interactive features that I was not able to explore here - for example, when hovering over a line at a certain year, I could display the average interest rate.
+* Add more interactivity to the graph. `react-vis` has interactive features that I was not able to explore here - for example, when hovering over a line at a certain year, I could display the average interest rate using `OnNearestX`.
